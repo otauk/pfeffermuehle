@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'base';
+    src: url('fonts/atrotisserif_regular-webfont.eot');
+    src: url('fonts/atrotisserif_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/atrotisserif_regular-webfont.woff2') format('woff2'),
+         url('fonts/atrotisserif_regular-webfont.woff') format('woff'),
+         url('fonts/atrotisserif_regular-webfont.ttf') format('truetype'),
+         url('fonts/atrotisserif_regular-webfont.svg#atrotisserifregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@c-body: rgb(255,241,220);
+@c-jumbotron: rgb(130,183,138);
+@c-orange-light: rgb(241,149,48);
+@c-orange-dark:rgb(218,109,50);
+
+@boldwith: 10px;
+
+body {
+	background-color: @c-body;
+	font-family: 'base';
+}
+
+.navbar {
+
+	font-size:1.35em;
+
+	&.navbar-default {
+		background-color: @c-body;
+		border: none;
+		color: rgb(0,0,0);
+	}
+
+	& .navbar-nav {
+    	display: inline-block;
+		float: none;
+	}
+
+	& .navbar-collapse {
+    	text-align: center;
+	}
+
+	& .navbar-nav>li>a {
+		padding: 10px;
+		color: rgb(0,0,0) ;
+		text-transform: uppercase;
+
+		&:focus, &:hover {
+		background-color: @c-body !important;
+		color: @c-orange-dark;
+		}
+	}
+}
+
+.divider-vertical {
+		height: 20px;
+		margin: 10px 5px;
+		border-left: 2px solid rgb(0,0,0);
+	}
+
+@media (max-width: 767px) {
+.navbar-collapse .nav > .divider-vertical {
+    display: none;
+  }
+}
+
+.jumbotron {
+	background-color: @c-jumbotron;
+	padding:0;
+	text-align: center;
+
+	& img {
+		width:100%;
+		max-height: 360px;
+	}
+}
+
+.copy {
+	margin: 15px 0;
+	line-height: 175%;
+	font-size: 150%;
+}
+
+.imgrow {
+	padding: 15px 0 30px 0;
+}
+
+.thumbnail {
+	border: @boldwith solid white;
+	border-radius: 0;
+	max-width: 100%;
+	padding: 0;
+}
+
+// Linien
+.line {
+
+	background-color: @c-orange-light;
+
+	&.light {
+		height: 1px;
+
+		&.topspace {
+			margin-top:@boldwith;
+		}
+
+		&.btmspace {
+			margin-bottom:@boldwith;
+		}
+	}
+
+	&.bold {
+		height: @boldwith;
+	}
+}
+
+.space {
+	padding:5px 0;
+}
+
+h1 {
+	color:@c-orange-dark;
+	text-transform: uppercase;
+}
