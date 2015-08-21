@@ -28,7 +28,7 @@
 		  <div class="line light topspace"></div>
 	  </div>
 	  <div class="container">
-		  <img src="img/logo.gif" alt="Pfeffermühle" class="logo pull-right" width="800"/>
+		  <img src="img/logo.gif" alt="Pfeffermühle" class="logo pull-right" width="860"/>
 	  </div>
 	  <div class="container">
 		<nav class="navbar navbar-default  ">
@@ -48,9 +48,42 @@
 		      <ul class="nav navbar-nav">
 		        <li><a href="#">Aktuell</a></li>
 		        <li class="divider-vertical"></li>
-		        <li><a href="#">Hotel</a></li>
+
+		        <!-- HOTEL -->
+		        <li class="dropdown">
+		          <a href="#"  role="button" aria-haspopup="true" aria-expanded="false">Hotel</a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#">Zimmer</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Appartement</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Frühstück</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Preise</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Galerie</a></li>
+		          </ul>
+		        </li>
 		        <li class="divider-vertical"></li>
-		        <li><a href="#">Gastronomie</a></li>
+
+
+		        <!-- GASTRONOMIE -->
+		         <li class="dropdown">
+		          <a href="#"  role="button" aria-haspopup="true" aria-expanded="false">Gastronomie</a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#">Restaurant</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Bierstube</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Speisekarte</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Feiern</a></li>
+		            <li class="divider-vertical sub"></li>
+		            <li><a href="#">Catering</a></li>
+		             <li class="divider-vertical sub"></li>
+		            <li><a href="#">Anfrage</a></li>
+		          </ul>
+		        </li>
 		        <li class="divider-vertical"></li>
 		        <li><a href="#">tagung</a></li>
 		        <li class="divider-vertical"></li>
@@ -61,20 +94,6 @@
 		        <li><a href="#">sehenswertes</a></li>
 		        <li class="divider-vertical"></li>
 		        <li><a href="#">kontakt</a></li>
-		        <!--
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="#">Action</a></li>
-		            <li><a href="#">Another action</a></li>
-		            <li><a href="#">Something else here</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="#">Separated link</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="#">One more separated link</a></li>
-		          </ul>
-		        </li>
-		        -->
 		      </ul>
 		        </li>
 		      </ul>
@@ -107,17 +126,25 @@
 		   </div>
 	   </div>
       <div class="row imgrow">
-	        <div class="col-md-3">
-	          <img src="img/placeholder.gif" class="thumbnail"/>
+	        <div class="col-md-3 col-xs-6">
+		        <div class="thumbnail">
+	          <img src="img/placeholder.gif" class="img-responsive"/>
+		        </div>
 	        </div>
-	        <div class="col-md-3">
-	          <img src="img/placeholder.gif" class="thumbnail"/>
+	        <div class="col-md-3 col-xs-6">
+		        <div class="thumbnail">
+	          <img src="img/placeholder.gif" class="img-responsive"/>
+		        </div>
 	        </div>
-	        <div class="col-md-3">
-	          <img src="img/placeholder.gif" class="thumbnail"/>
+	        <div class="col-md-3 col-xs-6" >
+		        <div class="thumbnail">
+	          <img src="img/placeholder.gif" />
+		        </div>
 	        </div>
-	        <div class="col-md-3">
-	          <img src="img/placeholder.gif" class="thumbnail"/>
+	        <div class="col-md-3 col-xs-6">
+		        <div class="thumbnail">
+	          <img src="img/placeholder.gif"/>
+		        </div>
 	        </div>
       </div>
     </div>
@@ -129,12 +156,44 @@
 
     </div> <!-- /container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+        $('ul.nav > li').click(function (e) {
+            e.preventDefault();
+            $('ul.nav > li').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('li.dropdown a').click(function (e) {
+            e.preventDefault();
+            $('li.dropdown a').parent().removeClass('active');
+            $(this).parent().addClass('active');
+        });
+
+
+
+        $('li.dropdown a').on('click', function (event) {
+	        $(this).parent().toggleClass('open');
+
+	        // Wenn Klasse "open" drauf ist, weg, sonst hin
+
+	    });
+
+	    $('body').on('click', function (e) {
+		    if (!$('li.dropdown').is(e.target)
+			&& $('li.dropdown').has(e.target).length === 0
+			&& $('.open').has(e.target).length === 0
+			) {
+				$('li.dropdown').removeClass('open');
+				$('li.dropdown').removeClass('active');
+    		}
+		});
+    });
+    </script>
+
   </body>
 </html>
 
