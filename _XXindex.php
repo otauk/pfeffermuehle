@@ -1,3 +1,20 @@
+<?php
+/*
+
+-1. Datenbank anlegen, mit Testwerten füllen;
+
+0. Formular zur Eingabe / Modifkation der Daten
+
+1. DB-Verbindung aufbauen
+
+2. Variablen mit Werten füllen
+
+3. Ausgabe im Template
+
+*/
+?>
+
+
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -85,7 +102,7 @@
 		          </ul>
 		        </li>
 		        <li class="divider-vertical"></li>
-		        <li><a href="#">tagung</a></li>
+		        <li><a href="tagung.html">tagung</a></li>
 		        <li class="divider-vertical"></li>
 		        <li><a href="#">urlaub</a></li>
 		        <li class="divider-vertical"></li>
@@ -162,7 +179,7 @@
     <script type="text/javascript">
 	$(document).ready(function () {
         $('ul.nav > li').click(function (e) {
-            e.preventDefault();
+            //e.preventDefault();
             $('ul.nav > li').removeClass('active');
             $(this).addClass('active');
         });
@@ -174,13 +191,12 @@
         });
 
 
+        $('li.dropdown a').click(function (e) {
+            e.preventDefault();
+            $('li.dropdown a').parent().removeClass('open');
+            $(this).parent().addClass('open');
+        });
 
-        $('li.dropdown a').on('click', function (event) {
-	        $(this).parent().toggleClass('open');
-
-	        // Wenn Klasse "open" drauf ist, weg, sonst hin
-
-	    });
 
 	    $('body').on('click', function (e) {
 		    if (!$('li.dropdown').is(e.target)

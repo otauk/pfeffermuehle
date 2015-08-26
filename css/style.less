@@ -13,6 +13,7 @@
 
 @c-body: rgb(255,241,220);
 @c-jumbotron: rgb(130,183,138);
+@c-jumbotron-orange: rgb(249,189,118);
 @c-orange-light: rgb(241,149,48);
 @c-orange-dark:rgb(218,109,50);
 
@@ -81,7 +82,7 @@ body {
 
 .dropdown-menu {
     margin-right:-1000px;
-    margin-left: -80px;
+    //margin-left: -80px;
     background-color: @c-body;
     font-size: 1em;
     border:none;
@@ -165,6 +166,24 @@ body {
 	margin: 15px 0;
 	line-height: 175%;
 	font-size: 1.2em;
+}
+
+.hspace {
+	width:3em;
+	display: inline-block;
+}
+
+table {
+	font-size:1em;
+	width:100%;
+
+	& td {
+		padding:10px 0;
+
+		&.pricetag {
+			text-align: right;
+		}
+	}
 }
 
 .imgrow {
