@@ -1,3 +1,11 @@
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Schriftarten
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
 @font-face {
     font-family: 'base';
     src: url('../fonts/atrotisserif_regular-webfont.eot');
@@ -11,19 +19,44 @@
 
 }
 
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Farben
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
 @c-body: rgb(255,241,220);
 @c-jumbotron: rgb(130,183,138);
 @c-jumbotron-orange: rgb(249,189,118);
 @c-orange-light: rgb(241,149,48);
 @c-orange-dark:rgb(218,109,50);
+@c-green:rgb(14,121,55);
 
 @boldwith: 9px;
+
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Body
++
++++++++++++++++++++++++++++++++++++++++
+*/
 
 body {
 	background-color: @c-body;
 	font-family: 'base';
 	font-size:16px;
 }
+
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Navigation
++
++++++++++++++++++++++++++++++++++++++++
+*/
 
 .navbar {
 
@@ -34,7 +67,8 @@ body {
 		background-color: @c-body;
 		border: none;
 		color: rgb(0,0,0);
-	}
+		}
+
 
 	& .navbar-nav {
     	display: inline-block;
@@ -68,6 +102,11 @@ body {
 	}
 }
 
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+	background-color: @c-body;
+	color: @c-orange-dark;
+}
 
 /*     Make Navigation Toggle on Desktop Hover
 @media only screen and (min-width : 768px) {
@@ -151,6 +190,14 @@ body {
   }
 }
 
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Jumbotron
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
 .jumbotron {
 	background-color: @c-jumbotron;
 	padding:0;
@@ -162,16 +209,103 @@ body {
 	}
 }
 
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Headlines
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
+h1 {
+	color:@c-orange-dark;
+	text-transform: uppercase;
+	font-size:2em;
+
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Fließtext
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
 .copy {
 	margin: 15px 0;
 	line-height: 175%;
 	font-size: 1.2em;
 }
 
-.hspace {
-	width:3em;
-	display: inline-block;
+
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Accordion
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
+
+.panel-default {
+	border:none;
+	&>.panel-heading {
+		color:inherit;
+		background-color: @c-body;
+		border:none;
+	}
 }
+
+.panel-heading {
+	padding: 10px 0;
+}
+
+.panel-title a {
+	font-size:1.2em;
+
+	&:not(.collapsed) {
+		color: @c-green;
+	}
+}
+.panel-title>a:hover {
+	text-decoration: none;
+	color: @c-green;
+}
+
+.panel-title a.collapsed:after {
+	font-family: 'Glyphicons Halflings';
+	content: "\e250";
+	color: @c-orange-dark;
+}
+
+.panel-title a:after {
+	font-family: 'Glyphicons Halflings';
+    content: "\e252";
+    float: left;
+    color: @c-orange-dark;
+    margin-right:5px;
+}
+
+.panel-body {
+	padding:10px 0;
+	border:0;
+	background-color: @c-body;
+	font-size: 1.2em;
+}
+
+.panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {
+	border:none;
+}
+
+
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Tabellen
++
++++++++++++++++++++++++++++++++++++++++
+*/
 
 table {
 	font-size:1em;
@@ -186,6 +320,14 @@ table {
 	}
 }
 
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Bilder
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
 .imgrow {
 	padding: 15px 0 30px 0;
 }
@@ -197,7 +339,14 @@ table {
 
 }
 
-// Linien
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Linien
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
 .line {
 
 	background-color: @c-orange-light;
@@ -219,13 +368,44 @@ table {
 	}
 }
 
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Forms
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
+label {
+	font-weight: 500;
+}
+
+.form-control:focus {
+	border-color: @c-green;
+	box-shadow: none;
+}
+
+.btn-default:hover {
+	background-color: @c-green;
+	color:#fff;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ misc
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
+.hspace {
+	width:3em;
+	display: inline-block;
+}
+
 .space {
 	padding:5px 0;
 }
 
-h1 {
-	color:@c-orange-dark;
-	text-transform: uppercase;
-	font-size:2em;
 
-}
+

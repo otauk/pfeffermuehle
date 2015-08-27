@@ -33,14 +33,16 @@ if ($subPage == "galerie") {
 	}
 // 3. Wenn nicht Startseite/Aktuelles, dann anderer jumbotron Background
 if ($thisPage !== "aktuelles") {$jtbg = "style='background-color:rgb(249,189,118);'";}
+// 4. Accordion
+$a = "style='display:none;'";
+	if ($subPage == "radfahren" || $subPage=="wandern") {
+	$stmt = $db->prepare("SELECT * FROM accordion WHERE name = ?");
+	$stmt->bindValue(1, $subPage, PDO::PARAM_STR);
+	$stmt->execute();
+	$a = "style='display:block;'";
+	};
 
-
-// Active-Status
-if ( $thisPage=="aktuelles") { $current = 'aktuelles' ;}
-// Hotel
-if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
-// Gastronomie
-if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
+include("nav.php");
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -94,18 +96,18 @@ if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
 		        <li class="divider-vertical"></li>
 
 		        <!-- HOTEL -->
-		        <li class="dropdown <?=$hotel;?>">
-		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hotel</a>
+		        <li class="dropdown <?=$hotel;?>" id="myDropdown">
+		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="hotel">Hotel</a>
 		          <ul class="dropdown-menu ">
 		            <li class="zimmer"><a href="?hotel&zimmer">Zimmer</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?hotel&appartement">Appartement</a></li>
+		            <li class="appartement"><a href="?hotel&appartement">Appartement</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?hotel&fruehstueck">Frühstück</a></li>
+		            <li class="fruehstueck"><a href="?hotel&fruehstueck">Frühstück</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?hotel&preise">Preise</a></li>
+		            <li class="preise"><a href="?hotel&preise">Preise</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?hotel&galerie">Galerie</a></li>
+		            <li class="galerie"><a href="?hotel&galerie">Galerie</a></li>
 		            <li class="divider-vertical sub"></li>
 		            <li><a href="?hotel&anfrage">Anfrage</a></li>
 		          </ul>
@@ -114,61 +116,67 @@ if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
 
 
 		        <!-- GASTRONOMIE -->
-		         <li class="dropdown">
+		         <li class="dropdown <?=$gastronomie;?>">
 		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gastronomie</a>
 		          <ul class="dropdown-menu">
-		            <li><a href="?gastronomie&restaurant">Restaurant</a></li>
+		            <li class="restaurant"><a href="?gastronomie&restaurant">Restaurant</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?gastronomie&bierstube">Bierstube</a></li>
+		            <li class="bierstube"><a href="?gastronomie&bierstube">Bierstube</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?gastronomie&speisekarte">Speisekarte</a></li>
+		            <li class="speisekarte"><a href="?gastronomie&speisekarte">Speisekarte</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?gastronomie&feiern">Feiern</a></li>
+		            <li class="gfeiern"><a href="?gastronomie&gfeiern">Feiern</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?gastronomie&catering">Catering</a></li>
+		            <li class="catering"><a href="?gastronomie&catering">Catering</a></li>
 		             <li class="divider-vertical sub"></li>
 		            <li><a href="?gastronomie&anfrage">Anfrage</a></li>
 		          </ul>
 		        </li>
+
+		        <!-- VERANSTALTUNGEN -->
 		        <li class="divider-vertical"></li>
-		       <li class="dropdown">
+		       <li class="dropdown <?=$veranstaltungen;?>">
 		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veranstaltungen</a>
 		          <ul class="dropdown-menu">
-		            <li><a href="?veranstaltungen&feiern">Feiern</a></li>
+		            <li class="feiern"><a href="?veranstaltungen&feiern">Feiern</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?veranstaltungen&meeting">Meeting</a></li>
+		            <li class="meeting"><a href="?veranstaltungen&meeting">Meeting</a></li>
 		            <li class="divider-vertical sub"></li>
 		            <li><a href="?veranstaltungen&anfrage">Anfrage</a></li>
 		          </ul>
 		        </li>
+
+		        <!-- AKTIVITÄTEN -->
 		        <li class="divider-vertical"></li>
-		       <li class="dropdown">
+		       <li class="dropdown <?=$aktivitaeten;?>">
 		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aktivitäten</a>
 		          <ul class="dropdown-menu">
-		            <li><a href="?aktivitaten&radfahren">Radfahren</a></li>
+		            <li class="radfahren"><a href="?aktivitaten&radfahren">Radfahren</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?aktivitaten&wandern">Wandern</a></li>
+		            <li class="wandern"><a href="?aktivitaten&wandern">Wandern</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?aktivitaten&andere">Andere Aktivitäten</a></li>
+		            <li class="andere"><a href="?aktivitaten&andere">Andere Aktivitäten</a></li>
 		            <li class="divider-vertical sub"></li>
 		            <li><a href="?aktivitaten&anfrage">Anfrage</a></li>
 		          </ul>
 		        </li>
+
+		        <!-- SEHENSWERTES -->
 		          <li class="divider-vertical"></li>
-		       <li class="dropdown">
+		       <li class="dropdown <?=$sehenswertes;?>">
 		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sehenswertes</a>
 		          <ul class="dropdown-menu">
-		            <li><a href="?sehenswertes&region">region</a></li>
+		            <li class="region"><a href="?sehenswertes&region">region</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?sehenswertes&paderborn">Stadt Paderborn</a></li>
+		            <li class="paderborn"><a href="?sehenswertes&paderborn">Stadt Paderborn</a></li>
 		            <li class="divider-vertical sub"></li>
-		            <li><a href="?sehenswertes&umgebung">Umgebung</a></li>
+		            <li class="umgebung"><a href="?sehenswertes&umgebung">Umgebung</a></li>
 		            <li class="divider-vertical sub"></li>
 		            <li><a href="?sehenswertes&anfrage">Anfrage</a></li>
 		          </ul>
 		        </li>
 		        <li class="divider-vertical"></li>
-		        <li><a href="?kontakt">kontakt</a></li>
+		        <li class="kontakt"><a href="?kontakt">kontakt</a></li>
 		      </ul>
 		        </li>
 		      </ul>
@@ -199,6 +207,33 @@ if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
 			   </div>
 		   </div>
 	   </div>
+
+	   <!-- Accordion -->
+	   <div class="panel-group" id="accordion" <?=$a;?>>
+		<?php
+			$count = 0;
+		      while ($acc = $stmt->fetch(PDO::FETCH_OBJ)) {
+			      echo '
+			      	<div class="panel panel-default">
+					    <div class="panel-heading">
+					      <h4 class="panel-title">
+					        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse'.$count.'">
+									'.$acc->heading.'
+							</a>
+					      </h4>
+					    </div>
+					    <div id="collapse'.$count.'" class="panel-collapse collapse">
+					      <div class="panel-body">
+					        '.$acc->body.'
+					      </div>
+					    </div>
+					  </div>
+				';
+				$count++;
+		      }
+		?>
+		 </div>
+
 	<!-- Standard thumbnails (4 Stück) -->
       <div class="row imgrow" <?=$d;?> name="standard">
 	        <div class="col-md-3 col-xs-6">
@@ -222,6 +257,7 @@ if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
 		        </div>
 	        </div>
       </div>
+    <!-- Galerie (beliebig) -->
       <div class="row imgrow" <?=$g;?> name="galerie">
 	      <?php
 		      while ($gall = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -234,8 +270,41 @@ if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
 				  	';
 		      }
 		      ?>
-
       </div>
+
+    	<!-- Kontaktformular -->
+		<form class="form-horizontal" action="send.php" method="POST">
+		  <div class="form-group">
+		    <label for="name" class="col-sm-2 control-label">Name</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="name" name="name" placeholder="Mustermann">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="vorname" class="col-sm-2 control-label">Vorname</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="vorname" name="vorname"  placeholder="Max">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="mail" class="col-sm-2 control-label">E-Mail</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="mail" name="mail" placeholder="max@mustermann.de">
+		    </div>
+		  </div>
+		<div class="form-group">
+		  <label for="comment" class="col-sm-2 control-label">Ihre Nachricht</label>
+		  <div class="col-sm-10">
+			  <textarea class="form-control" rows="5" id="comment" name="nachricht" ></textarea>
+		  </div>
+		</div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-default">Absenden</button>
+		    </div>
+		  </div>
+		</form>
+
     </div>
 
         <div class="container">
@@ -247,49 +316,25 @@ if ( $subPage=="zimmer") { $current = 'zimmer'; $hotel='open' ;}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
 
-    <script type="text/javascript">
+	    $(document).ready (function(){
+$('#myDropdown dropdown-menu>a').click(function(e) {
+    e.stopPropagation();
+});
+});
 
-
-	$(document).ready(function () {
-		/*
-        $('ul.nav > li').click(function (e) {
-            //e.preventDefault();
-            $('ul.nav > li').removeClass('active');
-            $(this).addClass('active');
-        });
-
-
-
-        $('li.dropdown a').click(function (e) {
-            //e.preventDefault();
-            $('li.dropdown a').parent().removeClass('active');
-            $(this).parent().addClass('active');
-        });
+$(document).ready(function(){
+$('.collapse').on('show', function(){
+    $(this).parent().find(".icon-chevron-left").removeClass("icon-chevron-left").addClass("icon-chevron-down");
+}).on('hide', function(){
+    $(this).parent().find(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-left");
+});
+});
 
 
-        $('li.dropdown a').click(function (e) {
-            //e.preventDefault();
-            $('li.dropdown a').parent().removeClass('open');
-            $(this).parent().addClass('open');
-        });
 
-
-	    $('body').on('click', function (e) {
-		    if (!$('li.dropdown').is(e.target)
-			&& $('li.dropdown').has(e.target).length === 0
-			&& $('.open').has(e.target).length === 0
-			) {
-				$('li.dropdown').removeClass('open');
-				$('li.dropdown').removeClass('active');
-    		}
-		});
-		*/
-
-    });
-
-    </script>
-
+	    </script>
   </body>
 </html>
 
