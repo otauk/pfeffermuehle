@@ -1,12 +1,7 @@
 <?php
 // Welche Seite soll angezeigt werden?
 $thisPage = $_SERVER['QUERY_STRING']; empty($thisPage) ? $thisPage = "aktuelles" : "";
-echo "<p>thisPage ".$thisPage."</p>";
-
-if(($pos = strpos($thisPage, "&")) !== FALSE) {
-	$subPage = substr($thisPage, $pos+1);
-	}
-echo "<p>subPage ".$subPage."</p>";
+if(($pos = strpos($thisPage, "&")) !== FALSE) {$subPage = substr($thisPage, $pos+1);}
 // db
 include("conn.php");
 if (isset($subPage)) {
@@ -24,10 +19,10 @@ $row = $stmt->fetch(PDO::FETCH_OBJ);
 // Besonderheiten
 // 1. Sind Bilder vorhanden (z.B. Preise)
 $row->img1 == "" ? $d = "style='display:none;'" :"";
-// 2. Auf der Seite "Galerie" Thumbnails aus eigener DB "gallery" einbindnden
+// 2. Auf der Seite "Galerie" Thumbnails aus eigener DB "gallery" einbinden
 $g = "style='display:none;'";
 if ($subPage == "galerie") {
-	$stmt = $db->prepare("SELECT * FROM gallery");
+	$stmt = $db->prepare("SELECT * FROM accordion");
 	$stmt->execute();
 	$g = "style='display:block;'";
 	}
@@ -74,7 +69,7 @@ include("nav.php");
 		  <div class="line light topspace"></div>
 	  </div>
 	  <div class="container">
-		  <img src="img/logo.gif" alt="Pfeffermühle" class="logo pull-right" width="860"/>
+		  <img src="img/logo.jpg" alt="Pfeffermühle" class="logo pull-right" width="860"/>
 	  </div>
 	  <div class="container">
 		<nav class="navbar navbar-default  ">
@@ -98,7 +93,7 @@ include("nav.php");
 		        <!-- HOTEL -->
 		        <li class="dropdown <?=$hotel;?>" id="myDropdown">
 		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="hotel">Hotel</a>
-		          <ul class="dropdown-menu ">
+		          <ul class="dropdown-menu dropdown-menu-right">
 		            <li class="zimmer"><a href="?hotel&zimmer">Zimmer</a></li>
 		            <li class="divider-vertical sub"></li>
 		            <li class="appartement"><a href="?hotel&appartement">Appartement</a></li>
@@ -264,7 +259,7 @@ include("nav.php");
 			      echo '
 			      	<div class="col-md-3 col-xs-6">
 				  		<div class="thumbnail">
-				  			<img src="'.$gall->img.'" class="img-responsive"/>
+				  			<img src="'.$gall->body.'" class="img-responsive"/>
 				  		</div>
 				  	</div>
 				  	';
@@ -272,38 +267,7 @@ include("nav.php");
 		      ?>
       </div>
 
-    	<!-- Kontaktformular -->
-		<form class="form-horizontal" action="send.php" method="POST">
-		  <div class="form-group">
-		    <label for="name" class="col-sm-2 control-label">Name</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="name" name="name" placeholder="Mustermann">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="vorname" class="col-sm-2 control-label">Vorname</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="vorname" name="vorname"  placeholder="Max">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="mail" class="col-sm-2 control-label">E-Mail</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="mail" name="mail" placeholder="max@mustermann.de">
-		    </div>
-		  </div>
-		<div class="form-group">
-		  <label for="comment" class="col-sm-2 control-label">Ihre Nachricht</label>
-		  <div class="col-sm-10">
-			  <textarea class="form-control" rows="5" id="comment" name="nachricht" ></textarea>
-		  </div>
-		</div>
-		  <div class="form-group">
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-default">Absenden</button>
-		    </div>
-		  </div>
-		</form>
+	  <?php if ($thisPage == "kontakt" || $subPage=="anfrage") {include("form.php");}?>
 
     </div>
 
