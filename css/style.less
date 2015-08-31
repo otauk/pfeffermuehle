@@ -50,6 +50,11 @@ body {
 	font-size:16px;
 }
 
+.container {
+	max-width:970px;
+
+}
+
 /*
 +++++++++++++++++++++++++++++++++++++++
 +
@@ -60,7 +65,7 @@ body {
 
 .navbar {
 
-	font-size:1.2em;
+	font-size:1em;
 	margin-bottom: 30px;
 
 	&.navbar-default {
@@ -108,26 +113,24 @@ body {
 	color: @c-orange-dark;
 }
 
-/*     Make Navigation Toggle on Desktop Hover
-@media only screen and (min-width : 768px) {
-
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
+.dropdown {
+	position: inherit;
 }
 
-*/
-
+.nav>li {
+	position: inherit;
+}
 
 .dropdown-menu {
-    margin-right:-1000px;
-    //margin-left: -80px;
+	margin-right:-1000px;
     background-color: @c-body;
     font-size: 1em;
     border:none;
     border-radius: 0;
     box-shadow: none;
     padding:0;
+    top:80%;
+    left:8%;
 
     &>.active>a {
 		color: @c-orange-dark;
@@ -151,6 +154,8 @@ body {
 	color: rgb(0,0,0);
 	text-transform: uppercase;
 	padding: 3px 10px;
+	white-space: normal;
+	text-decoration: none;
 
 		&:hover {
 			color:@c-orange-dark;
@@ -159,6 +164,9 @@ body {
 
 	}
 }
+
+
+
 
 
 .nav .open>a {
@@ -180,9 +188,13 @@ body {
 
 
 		&.sub {
-			margin:-2px 0;
+			margin:-5px 0;
 		}
 	}
+
+.list-inline>li {
+	padding:0;
+}
 
 @media (max-width: 767px) {
 .navbar-collapse .nav > .divider-vertical {
@@ -204,7 +216,7 @@ body {
 	text-align: center;
 
 	& img {
-		width:100%;
+		max-width:940px;
 		max-height: 450px;
 	}
 }
@@ -235,7 +247,7 @@ h1 {
 .copy {
 	margin: 15px 0;
 	line-height: 175%;
-	font-size: 1.2em;
+	font-size: 1em;
 }
 
 
@@ -274,14 +286,18 @@ h1 {
 }
 
 .panel-title a.collapsed:after {
-	font-family: 'Glyphicons Halflings';
-	content: "\e250";
+	//font-family: 'Glyphicons Halflings';
+	//content: "\e250";
+	font-family: "FontAwesome";
+	content: "\f0da";
 	color: @c-orange-dark;
 }
 
 .panel-title a:after {
-	font-family: 'Glyphicons Halflings';
-    content: "\e252";
+	//(font-family: 'Glyphicons Halflings';
+    //content: "\e252";
+    font-family: "FontAwesome";
+    content: "\f0d7";
     float: left;
     color: @c-orange-dark;
     margin-right:5px;

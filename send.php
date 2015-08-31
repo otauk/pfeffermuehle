@@ -1,7 +1,4 @@
 <?php
-
-var_dump($_POST);
-
 $name =  $_POST["name"];
 $vorname = $_POST["vorname"];
 $mail = $_POST["mail"];
@@ -50,31 +47,4 @@ Ihr Team vom Hotel Restaurant Pfeffermühle
 ";
 
 mail($mail, $subject, $text, $header);
-
-echo "<p>
-Sehr geehrte/r Herr/Frau $name,
-</p>
-<p>
-Sie haben am $datum folgende Anfrage gestellt:
-</p>
-
-<p>
-------------------------------------------------
-</p>
-
-<p>
-$nachricht
-</p>
-
-<p>
-------------------------------------------------
-</p>
-
-<p>
-Wir werden uns kurzfristig bezüglich Ihrer Anfrage mit Ihnen in Verbindung setzen.
-<p>
-Mit freundlichen Grüßen
-</p>
-Ihr Team vom Hotel Restaurant Pfeffermühle
-</p>";
 ?>

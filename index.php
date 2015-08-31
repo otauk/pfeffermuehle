@@ -1,7 +1,15 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 // Welche Seite soll angezeigt werden?
 $thisPage = $_SERVER['QUERY_STRING']; empty($thisPage) ? $thisPage = "aktuelles" : "";
 if(($pos = strpos($thisPage, "&")) !== FALSE) {$subPage = substr($thisPage, $pos+1);}
+
+	if (!empty($_POST)) {
+		include ("send.php");
+		$thisPage = "mail";
+		header("refresh: 5, url=index.php");
+	}
+
 // db
 include("conn.php");
 if (isset($subPage)) {
@@ -12,20 +20,13 @@ else {
 	$stmt = $db->prepare("SELECT * FROM content WHERE nav = ? LIMIT 1");
 	$stmt->bindValue(1, $thisPage, PDO::PARAM_STR);
 }
-
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_OBJ);
-
 // Besonderheiten
 // 1. Sind Bilder vorhanden (z.B. Preise)
 $row->img1 == "" ? $d = "style='display:none;'" :"";
 // 2. Auf der Seite "Galerie" Thumbnails aus eigener DB "gallery" einbinden
 $g = "style='display:none;'";
-if ($subPage == "galerie") {
-	$stmt = $db->prepare("SELECT * FROM accordion");
-	$stmt->execute();
-	$g = "style='display:block;'";
-	}
 // 3. Wenn nicht Startseite/Aktuelles, dann anderer jumbotron Background
 if ($thisPage !== "aktuelles") {$jtbg = "style='background-color:rgb(249,189,118);'";}
 // 4. Accordion
@@ -36,7 +37,6 @@ $a = "style='display:none;'";
 	$stmt->execute();
 	$a = "style='display:block;'";
 	};
-
 include("nav.php");
 ?>
 <!DOCTYPE html>
@@ -51,11 +51,10 @@ include("nav.php");
 
     <title>Pfeffermühle - DEV</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
      <link href="css/style.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -93,7 +92,7 @@ include("nav.php");
 		        <!-- HOTEL -->
 		        <li class="dropdown <?=$hotel;?>" id="myDropdown">
 		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="hotel">Hotel</a>
-		          <ul class="dropdown-menu dropdown-menu-right">
+		          <ul class="dropdown-menu">
 		            <li class="zimmer"><a href="?hotel&zimmer">Zimmer</a></li>
 		            <li class="divider-vertical sub"></li>
 		            <li class="appartement"><a href="?hotel&appartement">Appartement</a></li>
@@ -230,7 +229,7 @@ include("nav.php");
 		 </div>
 
 	<!-- Standard thumbnails (4 Stück) -->
-      <div class="row imgrow" <?=$d;?> name="standard">
+      <div class="row imgrow" <?=$d;?>>
 	        <div class="col-md-3 col-xs-6">
 		        <div class="thumbnail">
 	          <img src="<?php echo $row->img1;?>" class="img-responsive"/>
@@ -253,20 +252,26 @@ include("nav.php");
 	        </div>
       </div>
     <!-- Galerie (beliebig) -->
-      <div class="row imgrow" <?=$g;?> name="galerie">
-	      <?php
-		      while ($gall = $stmt->fetch(PDO::FETCH_OBJ)) {
-			      echo '
-			      	<div class="col-md-3 col-xs-6">
-				  		<div class="thumbnail">
-				  			<img src="'.$gall->body.'" class="img-responsive"/>
-				  		</div>
-				  	</div>
-				  	';
-		      }
-		      ?>
-      </div>
+			<?php
+		    	if ($subPage == "galerie") {
+					$gallery_db = $db->prepare("SELECT img FROM gallery");
+					$gallery_db->execute();
 
+					echo '<div class="row imgrow">';
+
+					while ($gallery_out = $gallery_db->fetch(PDO::FETCH_OBJ)) {
+				    	echo '
+					    	<div class="col-md-3 col-xs-6">
+								<div class="thumbnail">
+									<img src="'.$gallery_out->img.'" class="img-responsive"/>
+						  		</div>
+						  	</div>
+						';
+		      		}
+
+		      		echo ' </div>';
+    			}
+			?>
 	  <?php if ($thisPage == "kontakt" || $subPage=="anfrage") {include("form.php");}?>
 
     </div>
@@ -281,13 +286,11 @@ include("nav.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
-
 	    $(document).ready (function(){
 $('#myDropdown dropdown-menu>a').click(function(e) {
     e.stopPropagation();
 });
 });
-
 $(document).ready(function(){
 $('.collapse').on('show', function(){
     $(this).parent().find(".icon-chevron-left").removeClass("icon-chevron-left").addClass("icon-chevron-down");
@@ -295,10 +298,6 @@ $('.collapse').on('show', function(){
     $(this).parent().find(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-left");
 });
 });
-
-
-
 	    </script>
   </body>
 </html>
-
