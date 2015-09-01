@@ -52,8 +52,13 @@ body {
 
 .container {
 	max-width:970px;
-
 }
+
+.logo {
+	max-width: 800px;
+}
+
+
 
 /*
 +++++++++++++++++++++++++++++++++++++++
@@ -63,10 +68,13 @@ body {
 +++++++++++++++++++++++++++++++++++++++
 */
 
+@media (min-width: 768px) {
+
 .navbar {
 
 	font-size:1em;
 	margin-bottom: 30px;
+	border: none;
 
 	&.navbar-default {
 		background-color: @c-body;
@@ -196,11 +204,8 @@ body {
 	padding:0;
 }
 
-@media (max-width: 767px) {
-.navbar-collapse .nav > .divider-vertical {
-    display: none;
-  }
 }
+
 
 /*
 +++++++++++++++++++++++++++++++++++++++
@@ -214,12 +219,15 @@ body {
 	background-color: @c-jumbotron;
 	padding:0;
 	text-align: center;
+	margin-bottom: 15px;
 
 	& img {
 		max-width:940px;
 		max-height: 450px;
 	}
 }
+
+
 
 /*
 +++++++++++++++++++++++++++++++++++++++
@@ -345,7 +353,7 @@ table {
 */
 
 .imgrow {
-	padding: 15px 0 30px 0;
+	padding: 15px 0 15px  0;
 }
 
 .thumbnail {
@@ -423,5 +431,65 @@ label {
 	padding:5px 0;
 }
 
+// Farbe des Hamburgers
+  	.navbar-default .navbar-toggle {
+	  	border-color: @c-orange-light;
 
+	  	&:hover {
+		  	background-color: rgb(255,255,255);
+	  	}
+  	}
+
+  	.navbar-default .navbar-toggle .icon-bar {
+background-color: @c-orange-light;
+}
+
+.navbar-header {
+	background: @c-body;
+	border: none;
+	box-shadow: none;
+	padding:0;
+}
+
+.navbar-toggle {
+	margin:10px 0 0 0;
+}
+
+/*
++++++++++++++++++++++++++++++++++++++++
++
++ Media Queries
++
++++++++++++++++++++++++++++++++++++++++
+*/
+
+@media (max-width: 768px) {
+	// Logo auf Bildschirmbreite
+	.logo {
+		width: 100%;
+	}
+	// Jumbtron nicht anzeigen
+	.jumbotron {
+		display: none;
+	}
+	// Verhältnis h1 zu copy
+	h1 {
+		font-size: 1.25em;
+	}
+	h2 {
+		font-size: 1.1em;
+	}
+	// Divider in der Navi nicht anzeigen
+	.navbar-collapse .nav > .divider-vertical {
+    	display: none;
+  	}
+  	.navbar {
+	  	border:none;
+	  	min-height:0;
+  	}
+  	// Größe des Textes in den Klappboxen
+  	.panel-body {
+	  	font-size: 1em;
+  	}
+ }
 

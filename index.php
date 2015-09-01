@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 // Welche Seite soll angezeigt werden?
-$thisPage = $_SERVER['QUERY_STRING']; empty($thisPage) ? $thisPage = "aktuelles" : "";
+$thisPage = $_SERVER['QUERY_STRING']; empty($thisPage) ? $thisPage = "willkommen" : "";
 if(($pos = strpos($thisPage, "&")) !== FALSE) {$subPage = substr($thisPage, $pos+1);}
 
 	if (!empty($_POST)) {
@@ -28,7 +28,7 @@ $row->img1 == "" ? $d = "style='display:none;'" :"";
 // 2. Auf der Seite "Galerie" Thumbnails aus eigener DB "gallery" einbinden
 $g = "style='display:none;'";
 // 3. Wenn nicht Startseite/Aktuelles, dann anderer jumbotron Background
-if ($thisPage !== "aktuelles") {$jtbg = "style='background-color:rgb(249,189,118);'";}
+if ($thisPage !== "willkommen") {$jtbg = "style='background-color:rgb(249,189,118);'";}
 // 4. Accordion
 $a = "style='display:none;'";
 	if ($subPage == "radfahren" || $subPage=="wandern") {
@@ -37,6 +37,11 @@ $a = "style='display:none;'";
 	$stmt->execute();
 	$a = "style='display:block;'";
 	};
+// 5. Formatierung der Titel für die Lightbox
+if(($pos = strpos($thisPage, "&")) !== FALSE) {
+	$imgtitel = ucfirst(substr($thisPage, $pos+1));
+	}
+ else $imgtitel = ucfirst($thisPage);
 include("nav.php");
 ?>
 <!DOCTYPE html>
@@ -46,12 +51,13 @@ include("nav.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Homepage Hotel Restaurant Pfeffermühle, Paderborn">
-    <meta name="author" content="">
+    <meta name="author" content="Hotel Restaurant Pfeffermühle">
     <link rel="icon" href="../../favicon.ico">
 
     <title>Pfeffermühle - DEV</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/lightbox.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
      <link href="css/style.css" rel="stylesheet">
 
@@ -68,7 +74,9 @@ include("nav.php");
 		  <div class="line light topspace"></div>
 	  </div>
 	  <div class="container">
-		  <img src="img/logo.jpg" alt="Pfeffermühle" class="logo pull-right" width="860"/>
+		  <a href="?willkommen">
+		  <img src="img/logo.jpg" alt="Pfeffermühle" class="logo pull-right"/>
+		  </a>
 	  </div>
 	  <div class="container">
 		<nav class="navbar navbar-default  ">
@@ -91,7 +99,7 @@ include("nav.php");
 
 		        <!-- HOTEL -->
 		        <li class="dropdown <?=$hotel;?>" id="myDropdown">
-		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="hotel">Hotel</a>
+		          <a href="?hotel&zimmer"  aria-haspopup="true" aria-expanded="false" class="hotel">Hotel</a>
 		          <ul class="dropdown-menu">
 		            <li class="zimmer"><a href="?hotel&zimmer">Zimmer</a></li>
 		            <li class="divider-vertical sub"></li>
@@ -111,7 +119,7 @@ include("nav.php");
 
 		        <!-- GASTRONOMIE -->
 		         <li class="dropdown <?=$gastronomie;?>">
-		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gastronomie</a>
+		          <a href="?gastronomie&restaurant"  aria-haspopup="true" aria-expanded="false">Gastronomie</a>
 		          <ul class="dropdown-menu">
 		            <li class="restaurant"><a href="?gastronomie&restaurant">Restaurant</a></li>
 		            <li class="divider-vertical sub"></li>
@@ -130,7 +138,7 @@ include("nav.php");
 		        <!-- VERANSTALTUNGEN -->
 		        <li class="divider-vertical"></li>
 		       <li class="dropdown <?=$veranstaltungen;?>">
-		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veranstaltungen</a>
+		          <a href="?veranstaltungen&feiern"   aria-haspopup="true" aria-expanded="false">Veranstaltungen</a>
 		          <ul class="dropdown-menu">
 		            <li class="feiern"><a href="?veranstaltungen&feiern">Feiern</a></li>
 		            <li class="divider-vertical sub"></li>
@@ -143,7 +151,7 @@ include("nav.php");
 		        <!-- AKTIVITÄTEN -->
 		        <li class="divider-vertical"></li>
 		       <li class="dropdown <?=$aktivitaeten;?>">
-		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aktivitäten</a>
+		          <a href="?aktivitaten&radfahren"   aria-haspopup="true" aria-expanded="false">Aktivitäten</a>
 		          <ul class="dropdown-menu">
 		            <li class="radfahren"><a href="?aktivitaten&radfahren">Radfahren</a></li>
 		            <li class="divider-vertical sub"></li>
@@ -158,9 +166,9 @@ include("nav.php");
 		        <!-- SEHENSWERTES -->
 		          <li class="divider-vertical"></li>
 		       <li class="dropdown <?=$sehenswertes;?>">
-		          <a href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sehenswertes</a>
+		          <a href="?sehenswertes&region"  aria-haspopup="true" aria-expanded="false">Sehenswertes</a>
 		          <ul class="dropdown-menu">
-		            <li class="region"><a href="?sehenswertes&region">region</a></li>
+		            <li class="region"><a href="?sehenswertes&region">Region</a></li>
 		            <li class="divider-vertical sub"></li>
 		            <li class="paderborn"><a href="?sehenswertes&paderborn">Stadt Paderborn</a></li>
 		            <li class="divider-vertical sub"></li>
@@ -170,7 +178,7 @@ include("nav.php");
 		          </ul>
 		        </li>
 		        <li class="divider-vertical"></li>
-		        <li class="kontakt"><a href="?kontakt">kontakt</a></li>
+		        <li class="kontakt"><a href="?kontakt">Kontakt</a></li>
 		      </ul>
 		        </li>
 		      </ul>
@@ -182,9 +190,13 @@ include("nav.php");
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" <?=$jtbg;?>>
       <div class="container">
+	      <a href="<?php echo $row->jumbo;?>" data-lightbox="jumbo">
 	  		<img src="<?php echo $row->jumbo;?>" alt="Willkommen"/>
+	      </a>
        </div>
     </div>
+
+
 
     <div class="container">
 	    <div class="line light"></div>
@@ -230,26 +242,36 @@ include("nav.php");
 
 	<!-- Standard thumbnails (4 Stück) -->
       <div class="row imgrow" <?=$d;?>>
-	        <div class="col-md-3 col-xs-6">
+	        <div class="col-md-3 col-sm-6 col-xs-6">
 		        <div class="thumbnail">
-	          <img src="<?php echo $row->img1;?>" class="img-responsive"/>
+			        <a href="<?php echo $row->img1;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
+						<img src="<?php echo $row->img1;?>" class="img-responsive"/>
+			        </a>
 		        </div>
 	        </div>
-	        <div class="col-md-3 col-xs-6">
+	        <div class="col-md-3 col-sm-6 col-xs-6">
 		        <div class="thumbnail">
-	          <img src="<?php echo $row->img2;?>" class="img-responsive"/>
+			        <a href="<?php echo $row->img2;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
+						<img src="<?php echo $row->img2;?>" class="img-responsive"/>
+			        </a>
 		        </div>
 	        </div>
-	        <div class="col-md-3 col-xs-6" >
+	        <div class="col-md-3 col-sm-6 col-xs-6" >
 		        <div class="thumbnail">
-	          <img src="<?php echo $row->img3;?>" />
+			        <a href="<?php echo $row->img3;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
+						<img src="<?php echo $row->img3;?>" />
+			        </a>
 		        </div>
 	        </div>
-	        <div class="col-md-3 col-xs-6">
+
+	        <div class="col-md-3 col-sm-6 col-xs-6" >
 		        <div class="thumbnail">
-	          <img src="<?php echo $row->img4;?>"/>
+			        <a href="<?php echo $row->img4;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
+						<img src="<?php echo $row->img4;?>" />
+			        </a>
 		        </div>
 	        </div>
+
       </div>
     <!-- Galerie (beliebig) -->
 			<?php
@@ -263,6 +285,7 @@ include("nav.php");
 				    	echo '
 					    	<div class="col-md-3 col-xs-6">
 								<div class="thumbnail">
+									<a href="'.$gallery_out->img.'" data-lightbox="galerie" data-title="'.$imgtitel.'">
 									<img src="'.$gallery_out->img.'" class="img-responsive"/>
 						  		</div>
 						  	</div>
@@ -285,12 +308,15 @@ include("nav.php");
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/lightbox.js"></script>
     <script>
-	    $(document).ready (function(){
+	   /*
+		    $(document).ready (function(){
 $('#myDropdown dropdown-menu>a').click(function(e) {
     e.stopPropagation();
 });
 });
+*/
 $(document).ready(function(){
 $('.collapse').on('show', function(){
     $(this).parent().find(".icon-chevron-left").removeClass("icon-chevron-left").addClass("icon-chevron-down");
