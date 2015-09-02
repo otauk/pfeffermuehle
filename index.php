@@ -241,6 +241,7 @@ include("nav.php");
 		 </div>
 
 	<!-- Standard thumbnails (4 Stück) -->
+
       <div class="row imgrow" <?=$d;?>>
 	        <div class="col-md-3 col-sm-6 col-xs-6">
 		        <div class="thumbnail">

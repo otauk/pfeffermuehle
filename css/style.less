@@ -68,7 +68,7 @@ body {
 +++++++++++++++++++++++++++++++++++++++
 */
 
-@media (min-width: 768px) {
+@media (min-width: 991px) {
 
 .navbar {
 
@@ -315,7 +315,7 @@ h1 {
 	padding:10px 0;
 	border:0;
 	background-color: @c-body;
-	font-size: 1.2em;
+	//font-size: 1.2em;
 }
 
 .panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {
@@ -463,7 +463,7 @@ background-color: @c-orange-light;
 +++++++++++++++++++++++++++++++++++++++
 */
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 	// Logo auf Bildschirmbreite
 	.logo {
 		width: 100%;
@@ -489,7 +489,61 @@ background-color: @c-orange-light;
   	}
   	// Größe des Textes in den Klappboxen
   	.panel-body {
-	  	font-size: 1em;
+	  	font-size: inherit;
   	}
  }
+
+@media (max-width: 992px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+    .navbar-default {
+	    background-color: @c-body;
+    }
+    .navbar-default .navbar-nav>li>a {
+	    color:rgb(0,0,0);
+    }
+    .navbar-nav .open .dropdown-menu {
+	    position: static;
+float: none;
+width: auto;
+margin-top: 0;
+background-color: transparent;
+border: 0;
+-webkit-box-shadow: none;
+box-shadow: none;
+    }
+}
 
