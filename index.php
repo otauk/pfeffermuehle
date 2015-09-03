@@ -4,11 +4,37 @@ header('Content-Type: text/html; charset=utf-8');
 $thisPage = $_SERVER['QUERY_STRING']; empty($thisPage) ? $thisPage = "willkommen" : "";
 if(($pos = strpos($thisPage, "&")) !== FALSE) {$subPage = substr($thisPage, $pos+1);}
 
-	if (!empty($_POST)) {
-		include ("send.php");
-		$thisPage = "mail";
-		header("refresh: 5, url=index.php");
+// Validierung
+if (isset($_POST["raus"])) {
+	// Name
+	if(empty($_POST["name"])) {$fehler .= "Bitte geben Sie Ihren Namen an<br/>";} else {$name = validate($_POST["name"]);}
+	// Vorname
+	if(empty($_POST["vorname"])) {$fehler .= "Bitte geben Sie Ihren Vornamen an<br/>";} else {$vorname = validate($_POST["vorname"]);}
+	// Mail
+	if(empty($_POST["mail"])) {$fehler .= "Bitte geben Sie eine Mail-Adresse an (Format: vorname.nachname@test.de)<br/>";} else {$mail = validate($_POST["mail"]);}
+	// Nachricht
+	if(empty($_POST["nachricht"])) {$fehler .= "Bitte geben Sie eine Nachricht an<br/>";} else {$nachricht = validate($_POST["nachricht"]);}
+
+
+if ($fehler) {
+	$thisPage = "kontakt";
+	$confirmation = "<div class='confirmation'>$fehler</div>";
+
 	}
+else {
+	include ("send.php");
+	$thisPage = "mail";
+	header("refresh: 10, url=index.php");
+	}
+}
+
+function validate($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 
 // db
 include("conn.php");

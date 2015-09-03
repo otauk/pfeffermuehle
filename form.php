@@ -1,5 +1,7 @@
     	<!-- Kontaktformular -->
+    	<?php echo $confirmation; ?>
 		<form class="form-horizontal" action="index.php" method="POST">
+			<input type="hidden" name="raus" value="1">
 		  <div class="form-group">
 		    <label for="name" class="col-sm-2 control-label">Name</label>
 		    <div class="col-sm-10">

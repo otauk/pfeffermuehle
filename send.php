@@ -1,8 +1,7 @@
 <?php
-$name =  $_POST["name"];
-$vorname = $_POST["vorname"];
-$mail = $_POST["mail"];
-$nachricht = nl2br($_POST["nachricht"]);
+$nachricht = nl2br($nachricht);
+
+
 
 $timestamp = time();
 $datum = date("d.m.Y \u\m H:i \U\h\\r", $timestamp);
