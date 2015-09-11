@@ -1,6 +1,9 @@
 <?php
 // Verzeichnis für Bilder-Upload
-$target = $_SERVER['DOCUMENT_ROOT']."/pfeffermuehle/upload/";
+
+// an da finale Verzeichnis anpassen!
+
+$target = $_SERVER['DOCUMENT_ROOT']."/dev/upload/";
 $target = $target . basename( $_FILES['document']['name']);
 $document=($_FILES['document']['name']);
 
@@ -31,16 +34,4 @@ if (isset ($_POST["upload"])) {
 		// Abbruch
 		else {$confirmation = $fehler;}
 }
-
-// Patient gesendet?
-if (isset ($_POST["entry"])) {
-	// Eintrag vornehmens
-		$sqlab = 	"INSERT INTO aktuelles
-					(kunden_id, lieferdatum, rechnungsnummer, auftragsnummer, document, patient)
-					VALUES ('$kunde', '$lieferdatum', '$rechnungsnummer', '$auftragsnummer', '$document', '$patient')";
-		$query = mysqli_query ($con, $sqlab);
-		$query or die;
-		$confirmation = "<div class='alert green'>Daten erfolgreich &uuml;bernommen</div>";
-		header ("LOCATION: ../index.php?aktuelles");
-		}
 ?>
