@@ -258,6 +258,16 @@ h1 {
 	font-size: 1em;
 }
 
+.copy a {
+	color: @c-green;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: inherit;
+		color: @c-orange-dark;
+	}
+}
+
 
 /*
 +++++++++++++++++++++++++++++++++++++++
@@ -316,6 +326,16 @@ h1 {
 	border:0;
 	background-color: @c-body;
 	//font-size: 1.2em;
+}
+
+.panel-link {
+	color: @c-green;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: inherit;
+		color: @c-orange-dark;
+	}
 }
 
 .panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {

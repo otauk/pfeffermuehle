@@ -1,10 +1,9 @@
 <?php
 $nachricht = nl2br($nachricht);
-
-
-
 $timestamp = time();
 $datum = date("d.m.Y \u\m H:i \U\h\\r", $timestamp);
+
+$absender = "kuato@gmx.net";
 
 
 $sender            = "Hotel Restaurant Pfeffermühle";

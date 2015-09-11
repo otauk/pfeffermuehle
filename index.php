@@ -216,9 +216,7 @@ include("nav.php");
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" <?=$jtbg;?>>
       <div class="container">
-	      <a href="<?php echo $row->jumbo;?>" data-lightbox="jumbo">
 	  		<img src="<?php echo $row->jumbo;?>" alt="Willkommen"/>
-	      </a>
        </div>
     </div>
 
@@ -235,7 +233,17 @@ include("nav.php");
 	   <div class="row">
 		   <div class="col-md-12">
 			   <div class="copy">
-				   <?php echo $row->p;?>
+					<!-- Aktuelles -->
+				   <?php
+				   if ($thisPage == "aktuelles") {
+					   include("aktuelles.php");
+					   echo '
+					   	<a href="admin/index.php" style="float:right;">Login</a>
+					   ';
+					   }
+
+					   else  echo $row->p;
+					   ?>
 			   </div>
 		   </div>
 	   </div>
@@ -256,7 +264,12 @@ include("nav.php");
 					    </div>
 					    <div id="collapse'.$count.'" class="panel-collapse collapse">
 					      <div class="panel-body">
+					      <p>
 					        '.$acc->body.'
+					        </p>
+					        <p>
+					        <a class="panel-link" href="'.$acc->link.'" target="_blank">Weitere Informationen</a>
+					        </p>
 					      </div>
 					    </div>
 					  </div>
@@ -336,21 +349,5 @@ include("nav.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/lightbox.js"></script>
-    <script>
-	   /*
-		    $(document).ready (function(){
-$('#myDropdown dropdown-menu>a').click(function(e) {
-    e.stopPropagation();
-});
-});
-*/
-$(document).ready(function(){
-$('.collapse').on('show', function(){
-    $(this).parent().find(".icon-chevron-left").removeClass("icon-chevron-left").addClass("icon-chevron-down");
-}).on('hide', function(){
-    $(this).parent().find(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-left");
-});
-});
-	    </script>
   </body>
 </html>
