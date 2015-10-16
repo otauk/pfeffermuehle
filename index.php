@@ -217,17 +217,18 @@ include("nav.php");
 	    <?php
 		    if ($row->slider != NULL) {
 				// Arrays mit Bildernamen
-				$slider  = array(
-								["Willkommen1", "Willkommen2", "Willkommen3", "Willkommen4", "Willkommen5"],
-								["Hotel-Zimmer1","Hotel-Zimmer2","Hotel-Zimmer3","Hotel-Zimmer4", "Hotel-Zimmer5"],
-								["Hotel-Appart1", "Hotel-Appart2", "Hotel-Appart3", "Hotel-Appart4","Hotel-Appart5"],
-								["Hotel-Früh1","Hotel-Früh2", "Hotel-Früh3","Hotel-Früh4","Hotel-Früh5"],
-								["GASTRO_REST1","GASTRO_REST2","GASTRO_REST3","GASTRO_REST4"],
-								["GASTRO_BIER1","GASTRO_BIER2","GASTRO_BIER3","GASTRO_BIER4", "GASTRO_BIER5"],
-								["GASTRO_FEIERN1","GASTRO_FEIERN4","GASTRO_FEIERN5"],
-								["GASTRO_CATER1", "GASTRO_CATER2","GASTRO_CATER3","GASTRO_CATER4","GASTRO_CATER5"],
-								["SEHEN_STADTPADER1","SEHEN-STADTPADER2","SEHEN-STADTPADER3","SEHEN-STADTPADER4","SEHEN-STADTPADER5"],
-								);
+				$slider =  array 	(
+									0 => array ("Willkommen1", "Willkommen2", "Willkommen3", "Willkommen4", "Willkommen5"),
+									1 => array ("Hotel-Zimmer1","Hotel-Zimmer2","Hotel-Zimmer3","Hotel-Zimmer4", "Hotel-Zimmer5"),
+									2 => array ("Hotel-Appart1", "Hotel-Appart2", "Hotel-Appart3", "Hotel-Appart4","Hotel-Appart5"),
+									3 => array ("Hotel-Frueh1","Hotel-Frueh2", "Hotel-Frueh3","Hotel-Frueh4","Hotel-Frueh5"),
+									4 => array ("GASTRO_REST1","GASTRO_REST2","GASTRO_REST3","GASTRO_REST4"),
+									5 => array ("GASTRO_BIER1","GASTRO_BIER2","GASTRO_BIER3","GASTRO_BIER4", "GASTRO_BIER5"),
+									6 => array ("GASTRO_FEIERN1","GASTRO_FEIERN4","GASTRO_FEIERN5"),
+									7 => array ("GASTRO_CATER1", "GASTRO_CATER2","GASTRO_CATER3","GASTRO_CATER4","GASTRO_CATER5"),
+									8 => array ("SEHEN_STADTPADER1","SEHEN-STADTPADER2","SEHEN-STADTPADER3","SEHEN-STADTPADER4","SEHEN-STADTPADER5")
+									);
+
 				// Welche Seite?
 				if($thisPage == "willkommen") {$n = 0;}
 				elseif ($subPage == "zimmer"){$n=1;}
