@@ -213,11 +213,40 @@ include("nav.php");
 		</nav>
 	  </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" <?=$jtbg;?>>
-      <div class="container">
-	  		<img src="<?php echo $row->jumbo;?>" alt="Willkommen"/>
-       </div>
+	    <?php
+		    if ($row->slider != NULL) {
+				// Arrays mit Bildernamen
+				$slider  = array(
+								["Willkommen1", "Willkommen2", "Willkommen3", "Willkommen4", "Willkommen5"],
+								["Hotel-Zimmer1","Hotel-Zimmer2","Hotel-Zimmer3","Hotel-Zimmer4", "Hotel-Zimmer5"],
+								["Hotel-Appart1", "Hotel-Appart2", "Hotel-Appart3", "Hotel-Appart4","Hotel-Appart5"],
+								["Hotel-Früh1","Hotel-Früh2", "Hotel-Früh3","Hotel-Früh4","Hotel-Früh5"],
+								["GASTRO_REST1","GASTRO_REST2","GASTRO_REST3","GASTRO_REST4"],
+								["GASTRO_BIER1","GASTRO_BIER2","GASTRO_BIER3","GASTRO_BIER4", "GASTRO_BIER5"],
+								["GASTRO_FEIERN1","GASTRO_FEIERN4","GASTRO_FEIERN5"],
+								["GASTRO_CATER1", "GASTRO_CATER2","GASTRO_CATER3","GASTRO_CATER4","GASTRO_CATER5"],
+								["SEHEN_STADTPADER1","SEHEN-STADTPADER2","SEHEN-STADTPADER3","SEHEN-STADTPADER4","SEHEN-STADTPADER5"],
+								);
+				// Welche Seite?
+				if($thisPage == "willkommen") {$n = 0;}
+				elseif ($subPage == "zimmer"){$n=1;}
+				elseif ($subPage == "appartement"){$n=2;}
+				elseif ($subPage == "fruehstueck"){$n=3;}
+				elseif ($subPage == "restaurant"){$n=4;}
+				elseif ($subPage == "bierstube"){$n=5;}
+				elseif ($subPage == "gfeiern" OR $subPage == "feiern"){$n=6;}
+				elseif ($subPage == "catering"){$n=7;}
+				elseif ($subPage == "paderborn"){$n=8;}
+				// Array durchlaufen
+				echo '<ul class="bxslider" style="margin-left: -2.5em;">';
+					foreach ($slider[$n] as $img) {
+						echo '<li><img src="img/slider/'.$img.'.jpg" /></li>';
+					}
+				echo "</ul>";
+		    }
+		    else echo "<img src='$row->jumbo'/>";
+		?>
     </div>
 
 
@@ -349,5 +378,21 @@ include("nav.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/lightbox.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
   </body>
 </html>
+
+<script>
+	$(document).ready(function(){
+  $('.bxslider').bxSlider({
+	  mode: 'fade',
+	  auto: true,
+	  controls: false,
+	  pager: false,
+	  speed:2000,
+	  pause:8000,
+	  easing: 'ease-in-out'
+
+  });
+});
+</script>
