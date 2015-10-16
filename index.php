@@ -314,31 +314,23 @@ include("nav.php");
       <div class="row imgrow" <?=$d;?>>
 	        <div class="col-md-3 col-sm-6 col-xs-6">
 		        <div class="thumbnail">
-			        <a href="<?php echo $row->img1;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
 						<img src="<?php echo $row->img1;?>" class="img-responsive"/>
-			        </a>
 		        </div>
 	        </div>
 	        <div class="col-md-3 col-sm-6 col-xs-6">
 		        <div class="thumbnail">
-			        <a href="<?php echo $row->img2;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
 						<img src="<?php echo $row->img2;?>" class="img-responsive"/>
-			        </a>
 		        </div>
 	        </div>
 	        <div class="col-md-3 col-sm-6 col-xs-6" >
 		        <div class="thumbnail">
-			        <a href="<?php echo $row->img3;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
 						<img src="<?php echo $row->img3;?>" />
-			        </a>
 		        </div>
 	        </div>
 
 	        <div class="col-md-3 col-sm-6 col-xs-6" >
 		        <div class="thumbnail">
-			        <a href="<?php echo $row->img4;?>" data-lightbox="thumbnail" data-title="<?php echo $imgtitel;?>">
 						<img src="<?php echo $row->img4;?>" />
-			        </a>
 		        </div>
 	        </div>
 
