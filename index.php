@@ -85,7 +85,7 @@ include("nav.php");
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-     <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -218,13 +218,13 @@ include("nav.php");
 		    if ($row->slider != NULL) {
 				// Arrays mit Bildernamen
 				$slider =  array 	(
-									0 => array ("Willkommen1", "Willkommen2", "Willkommen3", "Willkommen4", "Willkommen5"),
+									0 => array ("Willkommen", "Willkommen2", "Willkommen3", "Willkommen4", "Willkommen5"),
 									1 => array ("Hotel-Zimmer1","Hotel-Zimmer2","Hotel-Zimmer3","Hotel-Zimmer4", "Hotel-Zimmer5"),
 									2 => array ("Hotel-Appart1", "Hotel-Appart2", "Hotel-Appart3", "Hotel-Appart4","Hotel-Appart5"),
 									3 => array ("Hotel-Frueh1","Hotel-Frueh2", "Hotel-Frueh3","Hotel-Frueh4","Hotel-Frueh5"),
-									4 => array ("GASTRO_REST1","GASTRO_REST2","GASTRO_REST3","GASTRO_REST4"),
+									4 => array ("GASTRO_REST1","GASTRO_REST2","GASTRO_REST3","GASTRO_REST4", "Willkommen4"),
 									5 => array ("GASTRO_BIER1","GASTRO_BIER2","GASTRO_BIER3","GASTRO_BIER4", "GASTRO_BIER5"),
-									6 => array ("GASTRO_FEIERN1","GASTRO_FEIERN4","GASTRO_FEIERN5"),
+									6 => array ("GASTRO_FEIERN1", "Hotel-Galerie8", "Hotel-Galerie1", "GASTRO_FEIERN4","GASTRO_FEIERN5"),
 									7 => array ("GASTRO_CATER1", "GASTRO_CATER2","GASTRO_CATER3","GASTRO_CATER4","GASTRO_CATER5"),
 									8 => array ("SEHEN_STADTPADER1","SEHEN-STADTPADER2","SEHEN-STADTPADER3","SEHEN-STADTPADER4","SEHEN-STADTPADER5")
 									);
@@ -349,6 +349,7 @@ include("nav.php");
 								<div class="thumbnail">
 									<a href="'.$gallery_out->img.'" data-lightbox="galerie" data-title="'.$imgtitel.'">
 									<img src="'.$gallery_out->img.'" class="img-responsive"/>
+									</a>
 						  		</div>
 						  	</div>
 						';
@@ -382,8 +383,8 @@ include("nav.php");
 	  auto: true,
 	  controls: false,
 	  pager: false,
-	  speed:2000,
-	  pause:8000,
+	  speed:1000,
+	  pause:6000,
 	  easing: 'ease-in-out'
 
   });
